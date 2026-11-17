@@ -1,0 +1,97 @@
+/* Docs skin: tokens.css (copy of docs/design/tokens.css) mapped onto Starlight's variables.
+   Personality budget, docs column (DESIGN.md): Mitr headings, 2px lip buttons, callouts only get edge + lip. No doodles, no animation. */
+@import '@fontsource/mitr/latin-500.css';
+@import '@fontsource/mitr/thai-500.css';
+@import '@fontsource/mitr/latin-600.css';
+@import '@fontsource/mitr/thai-600.css';
+@import '@fontsource/anuphan/thai-400.css';
+@import '@fontsource/anuphan/thai-500.css';
+@import '@fontsource/anuphan/thai-600.css';
+@import '@fontsource/anuphan/thai-700.css';
+@import '@fontsource/atkinson-hyperlegible-next/latin-400.css';
+@import '@fontsource/atkinson-hyperlegible-next/latin-500.css';
+@import '@fontsource/atkinson-hyperlegible-next/latin-600.css';
+@import '@fontsource/atkinson-hyperlegible-next/latin-700.css';
+@import '@fontsource/atkinson-hyperlegible-mono/latin-400.css';
+@import '@fontsource/atkinson-hyperlegible-mono/latin-500.css';
+@import './tokens.css';
+
+:root,
+:root[data-theme='light'],
+:root[data-theme='dark'] {
+  --sl-font: var(--font-sans);
+  --sl-font-mono: var(--font-mono);
+  --sl-color-bg: var(--background);
+  --sl-color-bg-nav: var(--background);
+  --sl-color-bg-sidebar: var(--sidebar);
+  --sl-color-bg-inline-code: var(--muted);
+  --sl-color-hairline: var(--border);
+  --sl-color-hairline-light: var(--border);
+  --sl-color-hairline-shade: var(--border);
+  --sl-color-white: var(--foreground);
+  --sl-color-black: var(--background);
+  --sl-color-text: var(--foreground);
+  --sl-color-text-accent: var(--primary);
+  --sl-color-text-invert: var(--primary-foreground);
+  --sl-color-gray-1: var(--foreground);
+  --sl-color-gray-2: var(--foreground);
+  --sl-color-gray-3: var(--muted-foreground);
+  --sl-color-gray-4: var(--muted-foreground);
+  --sl-color-gray-5: var(--border);
+  --sl-color-gray-6: var(--muted);
+  --sl-color-gray-7: var(--card);
+  --sl-color-accent: var(--primary);
+  --sl-color-accent-high: var(--sidebar-accent-foreground);
+  --sl-color-accent-low: var(--sidebar-accent);
+  --sl-sidebar-width: 15rem;
+  --sl-content-width: 70ch;
+  --sl-text-body: var(--text-md);
+}
+
+h1, h2, h3, h4,
+.sl-markdown-content :is(h1, h2, h3, h4) {
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+
+.sl-markdown-content a:not(:where(.not-content *)) { text-underline-offset: 0.2em; }
+.sl-markdown-content table { font-variant-numeric: tabular-nums; }
+
+/* Callouts only: edge and lip */
+.starlight-aside {
+  border: var(--edge-width) solid var(--edge);
+  border-radius: var(--radius);
+  box-shadow: var(--lip-sm);
+}
+
+.beta-note {
+  margin: 0.5rem 0 0;
+  color: var(--muted-foreground);
+  font-size: var(--text-sm, 0.875rem);
+}
+
+.copy-ai { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; margin-top: 1rem; }
+.copy-ai a { color: var(--primary); font-size: var(--text-sm, 0.875rem); }
+.copy-ai-btn {
+  font: inherit;
+  font-weight: 600;
+  padding: 0.375rem 0.875rem;
+  min-height: 2.5rem;
+  color: var(--foreground);
+  background: var(--card);
+  border: var(--edge-width) solid var(--edge);
+  border-radius: var(--radius);
+  box-shadow: var(--lip-sm);
+  cursor: pointer;
+}
+.copy-ai-btn:hover { background: var(--muted); }
+.copy-ai-btn:active { transform: translateY(2px); box-shadow: none; }
+.copy-ai-btn:focus-visible, .lang-toggle a:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+.lang-toggle { display: flex; gap: 0.25rem; list-style: none; margin: 0; padding: 0; }
+.lang-toggle a {
+  display: inline-block; min-width: 2.75rem; min-height: 2.5rem; line-height: 2.5rem; text-align: center;
+  color: var(--foreground); text-decoration: none; border-radius: var(--radius); font-weight: 600;
+}
+.lang-toggle a[aria-current='true'] { background: var(--sidebar-accent); color: var(--sidebar-accent-foreground); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: auto; } }

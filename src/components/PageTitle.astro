@@ -1,0 +1,34 @@
+---
+import { BETA_NOTICE, getPages, mdPath, parsePath, toMarkdown } from '../lib/pages';
+
+const here = parsePath(Astro.url.pathname);
+const page = here && getPages().find((p) => p.lang === here.lang && p.slug === here.slug);
+const lang = here?.lang ?? 'en';
+const label = lang === 'th' ? { copy: 'ก๊อปให้ AI', done: 'ก๊อปแล้ว', md: 'ดูเป็น Markdown' } : { copy: 'Copy for AI', done: 'Copied', md: 'View as Markdown' };
+---
+<h1 id="_top">{Astro.locals.starlightRoute.entry.data.title}</h1>
+<p class="beta-note">{BETA_NOTICE[lang]}</p>
+{page && (
+  <div class="copy-ai">
+    <button type="button" class="copy-ai-btn" data-done={label.done}>{label.copy}</button>
+    <a href={mdPath(page.lang, page.slug)}>{label.md}</a>
+    <script type="text/markdown" class="copy-ai-src" set:html={JSON.stringify(toMarkdown(page)).replace(/</g, '\\u003c')} is:inline></script>
+  </div>
+)}
+<script>
+  // Copies the same Markdown that /{lang}/{page}.md serves. It is embedded in the page, so no request is made.
+  document.querySelectorAll<HTMLButtonElement>('.copy-ai-btn').forEach((btn) => {
+    const original = btn.textContent;
+    btn.addEventListener('click', async () => {
+      const src = btn.parentElement?.querySelector('.copy-ai-src')?.textContent;
+      if (!src) return;
+      try {
+        await navigator.clipboard.writeText(JSON.parse(src));
+        btn.textContent = btn.dataset.done ?? 'Copied';
+        setTimeout(() => (btn.textContent = original), 2000);
+      } catch {
+        btn.textContent = '!';
+      }
+    });
+  });
+</script>
