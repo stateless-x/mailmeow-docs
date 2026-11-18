@@ -11,7 +11,7 @@ export const API_URL = 'https://api.mailmeow.dev';
 
 /** docs/copy/landing.md section 9, EN. Opens llms.txt and llms-full.txt. */
 export const ENTITY_EN =
-  "mailmeow is an email API that you call the same way as Resend, so Resend's Node.js SDK keeps working. Verify your domain on mailmeow, then change the base URL and API key. It sends through AWS SES in Singapore, and the API tells you whether each email was sent, delivered, bounced or marked as spam. Pooh (Purin Buriwong) built it for his own apps first and wants to open it to Thai builders who make apps with AI. It is not open for signup yet; join the waitlist.";
+  "mailmeow is an email API for sending email from your app, such as login codes and confirmation emails. It sends through AWS SES in Singapore, and the API tells you whether each email was sent, delivered, bounced or marked as spam. Pooh (Purin Buriwong) built it for his own apps first and wants to open it to Thai builders who make apps with AI. It is not open for signup yet; join the waitlist.";
 
 export const BETA_NOTICE = {
   en: 'mailmeow is in private beta and not open for signup yet. These pages describe the API as planned.',
@@ -50,7 +50,7 @@ export const PAGES: PageDef[] = [
 export const TH_DESCRIPTIONS: Record<string, string> = {
   quickstart: 'ขอ API key ทดสอบ ส่งอีเมลแรกด้วย cURL หรือ Resend SDK เช็กสถานะ แล้วเปลี่ยนไปใช้จริง',
   'ai-tools': 'พรอมต์ให้ก๊อปไปวางใน Claude Code, Cursor, Lovable, Bolt หรือเครื่องมือ AI อื่น เพื่อให้มันทำระบบส่งอีเมลฝั่ง server ด้วย mailmeow',
-  domain: 'เพิ่ม DNS record (DKIM, return path, SPF, DMARC) เพื่อส่งอีเมลจริงจากโดเมนของคุณ',
+  domain: 'เพิ่ม DNS record (DKIM, return path, SPF, DMARC) เพื่อส่งอีเมลจริงจากโดเมนตัวเอง',
 };
 
 export interface Page {
@@ -190,7 +190,7 @@ The prompts are in English because AI tools follow English best. They use the \`
 Building something else, or want the full rule list? See the [AI integration guide](/en/ai/).`,
   th: `เลือกเครื่องมือ AI ที่ใช้ ก๊อปพรอมต์ แล้ววางในแชตของมัน AI จะทำระบบส่งอีเมลฝั่ง server ให้ด้วย API key ทดสอบ (\`mm_test_\`) เลยไม่มีอีเมลไปถึงคนจริง
 
-ไม่ต้องพิมพ์ API key ในแชต พรอมต์สั่งให้ AI ปล่อยส่วนนี้ให้คุณทำเอง คือเอา API key ไปใส่ในหน้าตั้งค่า env หรือ secrets ของโปรเจกต์
+ไม่ต้องพิมพ์ API key ในแชต พรอมต์สั่งให้ AI ปล่อยส่วนนี้ไว้ให้ทำเอง คือเอา API key ไปใส่ในหน้าตั้งค่า env หรือ secrets ของโปรเจกต์
 
 พรอมต์เป็นภาษาอังกฤษ เพราะเครื่องมือ AI ทำตามภาษาอังกฤษได้แม่นกว่า ใช้วางได้เลยไม่ต้องแปล พรอมต์ใช้แพ็กเกจ \`resend\` หรือ \`fetch\` เพราะแพ็กเกจ \`mailmeow\` ยังไม่ได้ปล่อยบน npm API key สิทธิ์ส่งอีเมลอย่างเดียวดึงสถานะอีเมลกลับมาดูไม่ได้ พรอมต์เลยไม่ให้ทำ ถ้าอยากรู้สถานะให้ใช้ [webhooks](/th/webhooks/)
 
