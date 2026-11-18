@@ -83,7 +83,7 @@ To send live email from `you@acme.com`, prove you own `acme.com` by adding DNS r
 | `bounce.acme.com` | TXT `v=spf1 include:amazonses.com ~all` | **SPF**: lists who may send for you |
 | `_dmarc.acme.com` | TXT `v=DMARC1; p=none;` | **DMARC**: tells receivers what to do with failures |
 
-Verification usually takes a few minutes, and up to 72 hours if your DNS is slow. Already have a DMARC record? Keep yours. Moving from Resend? Its records use `send.acme.com`; ours use `bounce.acme.com`, so you can add ours without removing Resend's until you finish switching.
+Verification usually takes a few minutes, and up to 72 hours if your DNS is slow. An unverified domain stays yours while you wait; only after 72 hours, and only if another workspace adds the same domain, is your claim released. Already have a DMARC record? Keep yours. Moving from Resend? Its records use `send.acme.com`; ours use `bounce.acme.com`, so you can add ours without removing Resend's until you finish switching.
 
 ## Email statuses
 
@@ -109,6 +109,19 @@ When an address bounces permanently or marks you as spam, we stop sending to it.
 - Suppressions are per account.
 - Sending to a suppressed address still returns an `id`. The email gets status `suppressed`, and a `email.suppressed` webhook fires.
 - To remove an address (for example, a typo that got fixed), use the dashboard.
+- A suppression stays until you remove it, even after the email that caused it is deleted (see [Retention](#retention)).
+
+## Retention
+
+| What | How long |
+|---|---|
+| Email bodies (`html` and `text`) | 7 days on the Free plan, 30 days on paid plans. After that they return `null` |
+| The email itself (addresses, subject, status, events, webhook deliveries) | 90 days on every plan, then it is deleted and `GET /emails/{id}` returns `404` |
+| Blocked addresses (suppressions) | Until you remove them |
+
+Cleanup runs once a day. Delete a workspace and its emails, events, API keys, webhooks, blocked addresses and domains are deleted within 7 days. Sending stops at once: the workspace's keys are revoked, so live and test requests with them get `403 invalid_api_key`.
+
+Domain names have one owner at a time. An unverified claim older than 72 hours is released only when another workspace adds the same name, and a domain cannot be added while another workspace has verified its main domain (`mail.acme.com` when someone else has verified `acme.com`).
 
 ## Idempotency
 

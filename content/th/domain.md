@@ -16,7 +16,7 @@ description: เพิ่ม DNS record (DKIM, return path, SPF, DMARC) เพ�
 
 ## ใช้เวลานานแค่ไหน
 
-ถ้า DNS ของคุณช้า การตรวจอาจใช้เวลาถึง 72 ชั่วโมง
+ถ้า DNS ช้า การตรวจอาจใช้เวลาถึง 72 ชั่วโมง
 
 ## ถ้ามี DMARC อยู่แล้ว
 
@@ -26,4 +26,4 @@ description: เพิ่ม DNS record (DKIM, return path, SPF, DMARC) เพ�
 
 record ของ Resend ใช้ `send.acme.com` ส่วนของ mailmeow ใช้ `bounce.acme.com` เลยเพิ่มของเราได้โดยไม่ต้องลบของ Resend ก่อน รอให้ย้ายเสร็จแล้วค่อยลบ
 
-ยืนยันโดเมนแล้ว ก็เปลี่ยนจากคีย์ `mm_test_` เป็นคีย์ `mm_live_` ได้เลย ดูขั้นตอนที่ [ส่งอีเมลแรก](/th/quickstart/)
+ยืนยันโดเมนแล้ว ก็เปลี่ยนจาก API key `mm_test_` เป็น API key `mm_live_` ได้เลย ดูขั้นตอนที่ [ส่งอีเมลแรก](/th/quickstart/)

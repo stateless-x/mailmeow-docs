@@ -88,7 +88,7 @@ Response `200`:
 
 Test keys only see test emails; live keys only see live emails.
 
-`last_event` values are listed in [Email statuses](concepts.md#email-statuses). Email bodies are kept for 30 days; after that `html` and `text` return `null` and the rest stays.
+`last_event` values are listed in [Email statuses](concepts.md#email-statuses). Email bodies are kept for 7 days on the Free plan and 30 days on paid plans; after that `html` and `text` return `null`. The email itself is deleted after 90 days on every plan ([Retention](concepts.md#retention)).
 
 ## List emails
 
@@ -137,11 +137,11 @@ Errors always have this shape:
 |---|---|---|
 | 400 | `invalid_request` | Fix the JSON or a query parameter |
 | 401 | `missing_api_key` | Add the `Authorization: Bearer` header |
-| 403 | `invalid_api_key` | Check the key; it may be revoked |
+| 403 | `invalid_api_key` | Check the key; it may be revoked, or its workspace may have been deleted |
 | 403 | `invalid_from_address` | Verify the `from` domain, or use a test key |
 | 403 | `browser_request_blocked` | The key was used from a browser. Call mailmeow from your server instead ([why](https://docs.mailmeow.dev/concepts#keep-your-key-on-the-server)) |
 | 403 | `restricted_api_key` | This key can only send emails. Use a key with full access to read emails |
-| 403 | `account_paused` | Your account is paused, so it cannot send. Contact support |
+| 403 | `account_paused` | Your account is paused, so it cannot send live email (test keys still work). mailmeow pauses an account on its own when too many emails bounce or are reported as spam; contact support to ask for a review |
 | 404 | `not_found` | Check the id |
 | 405 | `method_not_allowed` | Use the method shown in the docs for this endpoint |
 | 409 | `invalid_idempotent_request` | You reused an `Idempotency-Key` with a different body |

@@ -48,7 +48,7 @@ export const PAGES: PageDef[] = [
 ];
 
 export const TH_DESCRIPTIONS: Record<string, string> = {
-  quickstart: 'ขอคีย์ทดสอบ ส่งอีเมลแรกด้วย cURL หรือ Resend SDK เช็กสถานะ แล้วเปลี่ยนไปใช้จริง',
+  quickstart: 'ขอ API key ทดสอบ ส่งอีเมลแรกด้วย cURL หรือ Resend SDK เช็กสถานะ แล้วเปลี่ยนไปใช้จริง',
   'ai-tools': 'พรอมต์ให้ก๊อปไปวางใน Claude Code, Cursor, Lovable, Bolt หรือเครื่องมือ AI อื่น เพื่อให้มันทำระบบส่งอีเมลฝั่ง server ด้วย mailmeow',
   domain: 'เพิ่ม DNS record (DKIM, return path, SPF, DMARC) เพื่อส่งอีเมลจริงจากโดเมนของคุณ',
 };
@@ -188,11 +188,11 @@ You never paste your key into the chat. The prompt tells the AI to leave that to
 The prompts are in English because AI tools follow English best. They use the \`resend\` package or plain \`fetch\`, because the \`mailmeow\` package is not published yet. A key that can only send cannot read an email's status back, so the prompts do not ask for it: use [webhooks](/en/webhooks/) for that.
 
 Building something else, or want the full rule list? See the [AI integration guide](/en/ai/).`,
-  th: `เลือกเครื่องมือ AI ที่ใช้ ก๊อปพรอมต์ แล้ววางในแชตของมัน AI จะทำระบบส่งอีเมลฝั่ง server ให้ด้วยคีย์ทดสอบ (\`mm_test_\`) เลยไม่มีอีเมลไปถึงคนจริง
+  th: `เลือกเครื่องมือ AI ที่ใช้ ก๊อปพรอมต์ แล้ววางในแชตของมัน AI จะทำระบบส่งอีเมลฝั่ง server ให้ด้วย API key ทดสอบ (\`mm_test_\`) เลยไม่มีอีเมลไปถึงคนจริง
 
-ไม่ต้องพิมพ์คีย์ในแชต พรอมต์สั่งให้ AI ปล่อยส่วนนี้ให้คุณทำเอง คือเอาคีย์ไปใส่ในหน้าตั้งค่า env หรือ secrets ของโปรเจกต์
+ไม่ต้องพิมพ์ API key ในแชต พรอมต์สั่งให้ AI ปล่อยส่วนนี้ให้คุณทำเอง คือเอา API key ไปใส่ในหน้าตั้งค่า env หรือ secrets ของโปรเจกต์
 
-พรอมต์เป็นภาษาอังกฤษ เพราะเครื่องมือ AI ทำตามภาษาอังกฤษได้แม่นกว่า ใช้วางได้เลยไม่ต้องแปล พรอมต์ใช้แพ็กเกจ \`resend\` หรือ \`fetch\` เพราะแพ็กเกจ \`mailmeow\` ยังไม่ได้ปล่อยบน npm คีย์สิทธิ์ส่งอีเมลอย่างเดียวดึงสถานะอีเมลกลับมาดูไม่ได้ พรอมต์เลยไม่ให้ทำ ถ้าอยากรู้สถานะให้ใช้ [webhooks](/th/webhooks/)
+พรอมต์เป็นภาษาอังกฤษ เพราะเครื่องมือ AI ทำตามภาษาอังกฤษได้แม่นกว่า ใช้วางได้เลยไม่ต้องแปล พรอมต์ใช้แพ็กเกจ \`resend\` หรือ \`fetch\` เพราะแพ็กเกจ \`mailmeow\` ยังไม่ได้ปล่อยบน npm API key สิทธิ์ส่งอีเมลอย่างเดียวดึงสถานะอีเมลกลับมาดูไม่ได้ พรอมต์เลยไม่ให้ทำ ถ้าอยากรู้สถานะให้ใช้ [webhooks](/th/webhooks/)
 
 ทำโปรเจกต์แบบอื่น หรืออยากอ่านกฎทั้งหมด ดู [คู่มือสำหรับ AI](/en/ai/) (มีแค่ภาษาอังกฤษ)`,
 };

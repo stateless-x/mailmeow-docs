@@ -11,7 +11,7 @@ One ready prompt per tool, for the Get started page and the screen after a key i
 
 ## Rules for every prompt
 
-- The prompt is English, because AI tools follow English best. The one-line intro above each prompt is Thai, for the human. Thai says "คีย์", never "key" (glossary §Decisions 1).
+- The prompt is English, because AI tools follow English best. The one-line intro above each prompt is Thai, for the human. Thai writes "API key" in English, never "คีย์" (glossary §Decisions 8).
 - **The key is never in a prompt.** The dashboard fills `{{BASE_URL}}` and nothing else. Env var names are literal: `MAILMEOW_API_KEY`, `MAILMEOW_BASE_URL`. Production value of `{{BASE_URL}}`: `https://api.mailmeow.dev` (not live yet; locally `http://localhost:8080`).
 - The `resend` package or plain `fetch` only. The own `mailmeow` SDK is not on npm yet; when it ships, swap it in here.
 - Each prompt stays under about 250 words.
@@ -57,7 +57,7 @@ Add email sending to this Next.js app with mailmeow, an email API that is compat
 
 ## Lovable
 
-TH intro: วางในแชตของ Lovable มันจะสร้างฟังก์ชันฝั่ง server ให้ แล้วถามให้เราใส่คีย์เอง
+TH intro: วางในแชตของ Lovable มันจะสร้างฟังก์ชันฝั่ง server ให้ แล้วถามให้เราใส่ API key เอง
 
 ````text
 Add email sending with mailmeow, an email API that is compatible with Resend. My UI runs in the browser, so the key may only exist inside a Supabase Edge Function.
