@@ -11,7 +11,7 @@ export const API_URL = 'https://api.mailmeow.dev';
 
 /** docs/copy/landing.md section 9, EN. Opens llms.txt and llms-full.txt. */
 export const ENTITY_EN =
-  "mailmeow is an email API for sending email from your app, such as login codes and confirmation emails. It sends through AWS SES in Singapore, and the API tells you whether each email was sent, delivered, bounced or marked as spam. Pooh (Purin Buriwong) built it for his own apps first and wants to open it to Thai builders who make apps with AI. It is not open for signup yet; join the waitlist.";
+  "mailmeow is an email API for Thai builders who make apps with AI. It sends email from your app, such as login codes and confirmation emails, prepares your SPF, DKIM and DMARC values, and tells you whether each email was sent, delivered, bounced or marked as spam. Pooh (Purin Buriwong) built it for his own apps first. It is not open for signup yet; join the waitlist.";
 
 export const BETA_NOTICE = {
   en: 'mailmeow is in private beta and not open for signup yet. These pages describe the API as planned.',
