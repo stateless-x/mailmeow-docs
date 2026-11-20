@@ -53,7 +53,7 @@ A live key refuses a From or Sender address on a domain that is not verified.
 
 - Each message can be up to 16 MB and have up to 50 recipients.
 - Attachments: up to 10 MB of files and 20 files per email. Some file types, such as `.exe`, are refused.
-- A message needs at least one recipient in To or Cc. Sending to Bcc only is not supported yet.
+- A message with only Bcc recipients (for example `To: undisclosed-recipients:;`) is sent as one email per recipient, each showing only that person's address. Each copy counts toward your limits, and the dashboard lists each one.
 - A retry is safe. mailmeow uses the Message-ID header and the recipients to recognise the same message, so it is not sent twice.
 
 ## Troubleshooting
@@ -66,7 +66,8 @@ Supabase only shows "Error sending ... email". To see why, open **API keys** in 
 | This API key was revoked. | Create a new API key and use it. |
 | The From domain is not verified for this account. | [Verify the domain](concepts.md#domains), or use a test key. |
 | This account is paused, so it cannot send live email. | Use a test key, or contact us. |
-| Put at least one recipient in To. | Add a To or Cc recipient. Bcc only is not supported yet. |
+| Sent to N of M recipients, then stopped: ... | Some Bcc copies went out before a limit was reached. Fix the reason; a retry sends only the rest. |
+| Sending these files to each Bcc recipient separately would store ... | Send to fewer recipients at a time, or with smaller files. |
 | The file ... can't be sent. / Too many attachments. / Attachments are too large. | Remove the file type that is refused (such as `.exe`), or send fewer and smaller files: 10 MB and 20 files per email. |
 | The message is larger than 16 MB. | Make the message smaller. |
 | The account's limit of ... emails a day / this month. | Wait for the reset time in the message, or contact us to send more. Test mode limits start again at 00:00 UTC (07:00 in Thailand). |
