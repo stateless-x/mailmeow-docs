@@ -1,0 +1,10 @@
+Welcome, {{name}}
+
+Your {{app_name}} account is ready.
+
+Press the button below to get started.
+
+Get started: {{url}}
+
+--
+{{app_name}}

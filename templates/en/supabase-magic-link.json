@@ -1,0 +1,35 @@
+{
+  "id": "supabase-magic-link",
+  "group": "supabase",
+  "title": "Magic link or OTP",
+  "supabaseTemplate": "Magic link or OTP",
+  "subject": "{{ .Token }} is your login code",
+  "preheader": "Log in with one tap or with a code.",
+  "previewHeight": 720,
+  "variables": [
+    {
+      "name": "Email",
+      "description": "The person's email address",
+      "example": "mali@example.com"
+    },
+    {
+      "name": "ConfirmationURL",
+      "description": "Link for a one-time sign-in",
+      "example": "https://example.com/confirm"
+    },
+    {
+      "name": "Token",
+      "description": "6-digit one-time code (OTP)",
+      "example": "482913"
+    }
+  ],
+  "available": [
+    "ConfirmationURL",
+    "Token",
+    "TokenHash",
+    "SiteURL",
+    "Email",
+    "Data",
+    "RedirectTo"
+  ]
+}

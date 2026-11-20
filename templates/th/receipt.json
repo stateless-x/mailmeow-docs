@@ -1,0 +1,50 @@
+{
+  "id": "receipt",
+  "group": "app",
+  "title": "ใบเสร็จ",
+  "subject": "ใบเสร็จ {{receipt_number}} จาก {{app_name}}",
+  "preheader": "ขอบคุณที่ใช้บริการ ยอดรวม {{total}}",
+  "previewHeight": 680,
+  "variables": [
+    {
+      "name": "name",
+      "description": "ชื่อของผู้รับ",
+      "example": "มะลิ"
+    },
+    {
+      "name": "app_name",
+      "description": "ชื่อแอป",
+      "example": "Cafe Meow"
+    },
+    {
+      "name": "receipt_number",
+      "description": "เลขที่ใบเสร็จหรือคำสั่งซื้อ",
+      "example": "INV-1042"
+    },
+    {
+      "name": "date",
+      "description": "วันที่ชำระเงิน เขียนเป็นข้อความที่อยากให้แสดง",
+      "example": "20 พ.ย. 2569"
+    },
+    {
+      "name": "item_name",
+      "description": "ชื่อสินค้าหนึ่งรายการ ให้ทำแถวซ้ำตามจำนวนสินค้า",
+      "example": "อาหารแมว 1 กก."
+    },
+    {
+      "name": "item_price",
+      "description": "ราคาสินค้ารายการนั้น พร้อมสกุลเงิน",
+      "example": "฿250"
+    },
+    {
+      "name": "total",
+      "description": "ยอดที่ชำระทั้งหมด พร้อมสกุลเงิน",
+      "example": "฿250"
+    },
+    {
+      "name": "url",
+      "description": "ลิงก์ดูใบเสร็จออนไลน์",
+      "example": "https://example.com/receipt"
+    }
+  ]
+}

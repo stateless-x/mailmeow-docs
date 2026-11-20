@@ -1,0 +1,14 @@
+ข้อความใหม่จากฟอร์มติดต่อ
+
+ชื่อ: {{sender_name}}
+อีเมล: {{sender_email}}
+
+ข้อความ:
+{{message}}
+
+ตอบกลับ: mailto:{{sender_email}}
+
+ส่งจากฟอร์มติดต่อของ {{app_name}}
+
+--
+{{app_name}}

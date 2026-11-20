@@ -34,6 +34,8 @@ description: ตั้งค่า Supabase Auth และเครื่อง�
 5. กด **Save changes**
 6. ลองสมัครสมาชิกในแอปด้วยอีเมลใหม่ ถ้าใช้ API key ทดสอบ อีเมลจะขึ้นในแดชบอร์ด mailmeow โหมดทดสอบ และไม่ไปถึงกล่องอีเมลจริง
 
+อยากได้อีเมลล็อกอิน (ยืนยันอีเมล, magic link, ตั้งรหัสผ่านใหม่) เป็นภาษาไทยหรืออังกฤษ ก๊อปเทมเพลตพร้อมใช้ได้ที่ [เทมเพลตอีเมล](/th/templates/)
+
 ## เพิ่มขีดจำกัดอีเมลของ Supabase
 
 พอเปิด custom SMTP แล้ว Supabase จะจำกัดไว้ที่ 30 ฉบับต่อชั่วโมงก่อน ไปที่ [Rate Limits](https://supabase.com/dashboard/project/_/auth/rate-limits) (**Authentication** → **Rate Limits**) ใน Supabase แล้วเพิ่ม **Rate limit for sending emails** ให้พอกับแอป

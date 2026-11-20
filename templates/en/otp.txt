@@ -1,0 +1,16 @@
+Your login code
+
+Hi {{name}},
+
+Use this code to log in to {{app_name}}.
+
+{{code}}
+
+This code expires in {{expires_in}}.
+
+Never share this code with anyone, not even the {{app_name}} team.
+
+Did not ask for this code? You can ignore this email.
+
+--
+{{app_name}}

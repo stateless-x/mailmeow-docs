@@ -2,6 +2,7 @@
 // Output is git-ignored; `bun run build` and `bun run dev` run it first.
 import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { aiToolsMdx, buildPages } from '../src/lib/pages';
+import { templatesMdx } from '../src/lib/templates-page';
 
 const out = new URL('../src/content/docs/', import.meta.url).pathname;
 rmSync(out, { recursive: true, force: true });
@@ -12,6 +13,7 @@ for (const p of buildPages()) {
   mkdirSync(dir, { recursive: true });
   const fm = `---\ntitle: ${JSON.stringify(p.title)}\ndescription: ${JSON.stringify(p.description)}\n---\n\n`;
   if (p.slug === 'ai-tools') writeFileSync(`${dir}${p.slug}.mdx`, fm + aiToolsMdx(p.lang));
+  else if (p.slug === 'templates') writeFileSync(`${dir}${p.slug}.mdx`, fm + templatesMdx(p.lang));
   else writeFileSync(`${dir}${p.slug}.md`, fm + p.body);
 }
 console.log('generated docs content');

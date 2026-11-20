@@ -1,0 +1,30 @@
+{
+  "id": "contact-form",
+  "group": "app",
+  "title": "แจ้งข้อความจากฟอร์มติดต่อ",
+  "subject": "ข้อความใหม่จาก {{sender_name}}",
+  "preheader": "{{sender_name}} ส่งข้อความมาทางฟอร์มติดต่อ",
+  "previewHeight": 600,
+  "variables": [
+    {
+      "name": "app_name",
+      "description": "ชื่อแอป",
+      "example": "Cafe Meow"
+    },
+    {
+      "name": "sender_name",
+      "description": "ชื่อที่ผู้ส่งกรอกในฟอร์ม",
+      "example": "มะลิ"
+    },
+    {
+      "name": "sender_email",
+      "description": "อีเมลที่ผู้ส่งกรอกในฟอร์ม",
+      "example": "mali@example.com"
+    },
+    {
+      "name": "message",
+      "description": "ข้อความของผู้ส่ง ต้อง escape HTML ก่อนใส่ลงในอีเมล",
+      "example": "ส่งไปเชียงใหม่ไหม"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+---
+// One email template: live preview, subject, HTML, plain text, variables. Works without JS (the code blocks'
+// copy buttons are Starlight's own).
+import { Code } from '@astrojs/starlight/components';
+import type { Lang } from '../lib/pages';
+import { loadTemplate, previewHtml } from '../lib/templates';
+import { TEMPLATE_LABELS, variableRows } from '../lib/templates-page';
+
+interface Props { id: string; lang: Lang }
+const { id, lang } = Astro.props;
+const t = loadTemplate(lang, id);
+const l = TEMPLATE_LABELS[lang];
+const kb = (t.html.length / 1024).toFixed(1);
+// Explicit light colours so the preview stays readable when the docs are in dark mode.
+const frameStyle = `width:100%;height:${t.previewHeight}px;border:1px solid #d4d4d8;border-radius:8px;background:#f4f4f5;color-scheme:light;`;
+---
+<div class="tpl-card">
+  {t.supabaseTemplate && <p>{l.supabaseName}: <strong>{t.supabaseTemplate}</strong></p>}
+  <p>{l.subject}: <code>{t.subject}</code></p>
+  <iframe class="tpl-preview" title={`${l.preview}: ${t.title}`} sandbox="" loading="lazy" srcdoc={previewHtml(t)} style={frameStyle}></iframe>
+  <details>
+    <summary>{l.html} ({kb} KB)</summary>
+    <Code code={t.html} lang="html" wrap />
+  </details>
+  <details>
+    <summary>{l.text}</summary>
+    <Code code={t.text} lang="text" wrap />
+  </details>
+  <table>
+    <thead><tr><th>{l.variable}</th><th>{l.meaning}</th><th>{l.example}</th></tr></thead>
+    <tbody>
+      {variableRows(t).map((r) => <tr><td><code>{r.token}</code></td><td>{r.description}</td><td>{r.example}</td></tr>)}
+    </tbody>
+  </table>
+</div>

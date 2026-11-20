@@ -1,0 +1,30 @@
+{
+  "id": "supabase-confirm-signup",
+  "group": "supabase",
+  "title": "Confirm sign up",
+  "supabaseTemplate": "Confirm sign up",
+  "subject": "Confirm your email to get started",
+  "preheader": "One tap to confirm your email address.",
+  "previewHeight": 520,
+  "variables": [
+    {
+      "name": "Email",
+      "description": "The person's email address",
+      "example": "mali@example.com"
+    },
+    {
+      "name": "ConfirmationURL",
+      "description": "Link to confirm the email address",
+      "example": "https://example.com/confirm"
+    }
+  ],
+  "available": [
+    "ConfirmationURL",
+    "Token",
+    "TokenHash",
+    "SiteURL",
+    "Email",
+    "Data",
+    "RedirectTo"
+  ]
+}

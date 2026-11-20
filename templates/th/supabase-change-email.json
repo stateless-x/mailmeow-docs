@@ -1,0 +1,36 @@
+{
+  "id": "supabase-change-email",
+  "group": "supabase",
+  "title": "เปลี่ยนอีเมล",
+  "supabaseTemplate": "Change email address",
+  "subject": "ยืนยันการเปลี่ยนอีเมล",
+  "preheader": "ยืนยันการเปลี่ยนเป็น {{ .NewEmail }}",
+  "previewHeight": 560,
+  "variables": [
+    {
+      "name": "Email",
+      "description": "อีเมลของผู้ใช้",
+      "example": "mali@example.com"
+    },
+    {
+      "name": "NewEmail",
+      "description": "อีเมลใหม่",
+      "example": "new@example.com"
+    },
+    {
+      "name": "ConfirmationURL",
+      "description": "ลิงก์สำหรับยืนยันการเปลี่ยนอีเมล",
+      "example": "https://example.com/confirm"
+    }
+  ],
+  "available": [
+    "ConfirmationURL",
+    "Token",
+    "TokenHash",
+    "SiteURL",
+    "Email",
+    "Data",
+    "RedirectTo",
+    "NewEmail"
+  ]
+}

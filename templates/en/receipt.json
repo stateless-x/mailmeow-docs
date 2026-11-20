@@ -1,0 +1,50 @@
+{
+  "id": "receipt",
+  "group": "app",
+  "title": "Receipt",
+  "subject": "Receipt {{receipt_number}} from {{app_name}}",
+  "preheader": "Thank you. Total {{total}}.",
+  "previewHeight": 680,
+  "variables": [
+    {
+      "name": "name",
+      "description": "The person's name",
+      "example": "Mali"
+    },
+    {
+      "name": "app_name",
+      "description": "Your app's name",
+      "example": "Cafe Meow"
+    },
+    {
+      "name": "receipt_number",
+      "description": "Receipt or order number",
+      "example": "INV-1042"
+    },
+    {
+      "name": "date",
+      "description": "Payment date, written the way you want it shown",
+      "example": "20 Nov 2026"
+    },
+    {
+      "name": "item_name",
+      "description": "Name of one item. Repeat the row for each item",
+      "example": "Cat food, 1 kg"
+    },
+    {
+      "name": "item_price",
+      "description": "Price of that item, with the currency",
+      "example": "฿250"
+    },
+    {
+      "name": "total",
+      "description": "The total paid, with the currency",
+      "example": "฿250"
+    },
+    {
+      "name": "url",
+      "description": "Link to view the receipt online",
+      "example": "https://example.com/receipt"
+    }
+  ]
+}

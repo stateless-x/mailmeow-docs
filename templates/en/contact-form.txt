@@ -1,0 +1,14 @@
+New contact form message
+
+Name: {{sender_name}}
+Email: {{sender_email}}
+
+Message:
+{{message}}
+
+Reply: mailto:{{sender_email}}
+
+Sent from the contact form on {{app_name}}.
+
+--
+{{app_name}}

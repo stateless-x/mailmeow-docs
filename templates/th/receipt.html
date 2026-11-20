@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="th">
+<head>
+<!-- Change #2563EB to your brand colour (find and replace, it appears several times) and set the logo URL. Replace the {{placeholders}} in your own code before sending; {{app_name}} can also be typed as YOUR APP. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<title>ใบเสร็จ {{receipt_number}} จาก {{app_name}}</title>
+<style>
+  @media only screen and (max-width: 620px) { .px { padding-left: 20px !important; padding-right: 20px !important; } }
+</style>
+</head>
+<body style="margin:0;padding:0;background-color:#f4f4f5;">
+<span class="preheader" style="display:none;font-size:1px;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;">ขอบคุณที่ใช้บริการ ยอดรวม {{total}}</span>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4f4f5;">
+<tr><td align="center" style="padding:24px 12px;">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:600px;background-color:#ffffff;border:1px solid #e5e7eb;border-radius:8px;">
+<tr><td class="px" style="padding:28px 32px 8px 32px;">
+<!-- <img src="https://example.com/logo.png" alt="{{app_name}}" width="120" style="display:block;border:0;height:auto;"> -->
+<div style="font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:18px;line-height:1.6;color:#2563EB;font-weight:bold;">{{app_name}}</div>
+</td></tr>
+<tr><td class="px" style="padding:16px 32px 28px 32px;">
+<h1 style="margin:0 0 16px 0;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:24px;line-height:1.4;color:#111827;font-weight:bold;">ใบเสร็จรับเงิน</h1>
+<p style="margin:0 0 16px 0;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:16px;line-height:1.6;color:#111827;">ขอบคุณ {{name}} นี่คือสรุปรายการที่ชำระแล้ว</p>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 16px 0;"><tr><td width="40%" valign="top" style="padding:4px 12px 4px 0;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:14px;line-height:1.6;color:#4b5563;">เลขที่ใบเสร็จ</td><td valign="top" style="padding:4px 0;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:16px;line-height:1.6;color:#111827;">{{receipt_number}}</td></tr><tr><td width="40%" valign="top" style="padding:4px 12px 4px 0;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:14px;line-height:1.6;color:#4b5563;">วันที่</td><td valign="top" style="padding:4px 0;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:16px;line-height:1.6;color:#111827;">{{date}}</td></tr></table>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:8px 0 24px 0;border-top:1px solid #e5e7eb;"><tr><td style="padding:8px 0;border-bottom:1px solid #e5e7eb;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:14px;line-height:1.6;color:#4b5563;">รายการ</td><td align="right" style="padding:8px 0;border-bottom:1px solid #e5e7eb;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:14px;line-height:1.6;color:#4b5563;">ราคา</td></tr>
+<!-- Repeat this row for each item -->
+<tr><td valign="top" style="padding:10px 0;border-bottom:1px solid #e5e7eb;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:16px;line-height:1.6;color:#111827;">{{item_name}}</td><td align="right" valign="top" style="padding:10px 0;border-bottom:1px solid #e5e7eb;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:16px;line-height:1.6;color:#111827;">{{item_price}}</td></tr>
+<tr><td valign="top" style="padding:10px 0;font-weight:bold;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:16px;line-height:1.6;color:#111827;">รวมทั้งหมด</td><td align="right" valign="top" style="padding:10px 0;font-weight:bold;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:16px;line-height:1.6;color:#111827;">{{total}}</td></tr></table>
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:8px 0 20px 0;"><tr><td align="center" bgcolor="#2563EB" style="background-color:#2563EB;border-radius:6px;"><a href="{{url}}" target="_blank" style="display:inline-block;padding:14px 28px;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:16px;line-height:1.6;color:#ffffff;font-weight:bold;text-decoration:none;border-radius:6px;">ดูใบเสร็จ</a></td></tr></table>
+<p style="margin:0 0 16px 0;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:14px;line-height:1.6;color:#4b5563;">ถ้ากดปุ่มไม่ได้ ให้ก๊อป link นี้ไปวางในเบราว์เซอร์<br><a href="{{url}}" target="_blank" style="color:#2563EB;word-break:break-all;">{{url}}</a></p>
+</td></tr>
+</table>
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:600px;">
+<tr><td class="px" align="center" style="padding:16px 32px;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:12px;line-height:1.6;color:#4b5563;">{{app_name}}</td></tr>
+</table>
+</td></tr>
+</table>
+</body>
+</html>

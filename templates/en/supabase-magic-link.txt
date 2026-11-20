@@ -1,0 +1,16 @@
+Log in to YOUR APP
+
+Press the button below to log in as {{ .Email }}.
+
+Log in: {{ .ConfirmationURL }}
+
+Or enter this code on the login page:
+
+{{ .Token }}
+
+Never share this code or link with anyone. Both stop working soon.
+
+Did not ask to log in? You can ignore this email.
+
+--
+YOUR APP

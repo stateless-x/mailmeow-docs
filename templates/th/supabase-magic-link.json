@@ -1,0 +1,35 @@
+{
+  "id": "supabase-magic-link",
+  "group": "supabase",
+  "title": "Magic link หรือ OTP",
+  "supabaseTemplate": "Magic link or OTP",
+  "subject": "รหัสเข้าสู่ระบบ {{ .Token }}",
+  "preheader": "เข้าสู่ระบบด้วยปุ่มเดียว หรือใช้รหัส OTP",
+  "previewHeight": 720,
+  "variables": [
+    {
+      "name": "Email",
+      "description": "อีเมลของผู้ใช้",
+      "example": "mali@example.com"
+    },
+    {
+      "name": "ConfirmationURL",
+      "description": "ลิงก์สำหรับเข้าสู่ระบบครั้งเดียว",
+      "example": "https://example.com/confirm"
+    },
+    {
+      "name": "Token",
+      "description": "รหัส OTP 6 หลัก",
+      "example": "482913"
+    }
+  ],
+  "available": [
+    "ConfirmationURL",
+    "Token",
+    "TokenHash",
+    "SiteURL",
+    "Email",
+    "Data",
+    "RedirectTo"
+  ]
+}

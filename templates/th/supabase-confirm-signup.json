@@ -1,0 +1,30 @@
+{
+  "id": "supabase-confirm-signup",
+  "group": "supabase",
+  "title": "ยืนยันอีเมลสมัครสมาชิก",
+  "supabaseTemplate": "Confirm sign up",
+  "subject": "ยืนยันอีเมลเพื่อเริ่มใช้งาน",
+  "preheader": "กดปุ่มเดียวเพื่อยืนยันอีเมล",
+  "previewHeight": 520,
+  "variables": [
+    {
+      "name": "Email",
+      "description": "อีเมลของผู้ใช้",
+      "example": "mali@example.com"
+    },
+    {
+      "name": "ConfirmationURL",
+      "description": "ลิงก์สำหรับยืนยันอีเมล",
+      "example": "https://example.com/confirm"
+    }
+  ],
+  "available": [
+    "ConfirmationURL",
+    "Token",
+    "TokenHash",
+    "SiteURL",
+    "Email",
+    "Data",
+    "RedirectTo"
+  ]
+}

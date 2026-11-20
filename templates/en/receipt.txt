@@ -1,0 +1,15 @@
+Receipt
+
+Thank you, {{name}}. Here is a summary of what you paid.
+
+Receipt number: {{receipt_number}}
+Date: {{date}}
+
+Item / Price
+{{item_name}}  {{item_price}}
+Total: {{total}}
+
+View receipt: {{url}}
+
+--
+{{app_name}}

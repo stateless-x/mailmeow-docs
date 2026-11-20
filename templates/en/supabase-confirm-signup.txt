@@ -1,0 +1,10 @@
+Confirm your email
+
+Thanks for signing up for YOUR APP. Press the button below to confirm {{ .Email }}.
+
+Confirm email: {{ .ConfirmationURL }}
+
+Did not sign up? You can ignore this email.
+
+--
+YOUR APP

@@ -1,0 +1,30 @@
+{
+  "id": "otp",
+  "group": "app",
+  "title": "Login code (OTP)",
+  "subject": "{{code}} is your login code",
+  "preheader": "This code expires in {{expires_in}}. Never share it.",
+  "previewHeight": 520,
+  "variables": [
+    {
+      "name": "code",
+      "description": "The one-time code the person types in",
+      "example": "482913"
+    },
+    {
+      "name": "name",
+      "description": "The person's name",
+      "example": "Mali"
+    },
+    {
+      "name": "app_name",
+      "description": "Your app's name",
+      "example": "Cafe Meow"
+    },
+    {
+      "name": "expires_in",
+      "description": "How long it stays valid, written the way you want it shown",
+      "example": "10 minutes"
+    }
+  ]
+}

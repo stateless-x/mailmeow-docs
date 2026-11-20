@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="th">
+<head>
+<!-- Change #2563EB to your brand colour (find and replace, it appears several times), replace YOUR APP and the logo URL. Keep the {{ .Variables }}: Supabase fills them in. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<title>รหัสยืนยันตัวตน {{ .Token }}</title>
+<style>
+  @media only screen and (max-width: 620px) { .px { padding-left: 20px !important; padding-right: 20px !important; } }
+</style>
+</head>
+<body style="margin:0;padding:0;background-color:#f4f4f5;">
+<span class="preheader" style="display:none;font-size:1px;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;">ใส่รหัสนี้เพื่อยืนยันว่าเป็นเจ้าของบัญชี อย่าบอกรหัสนี้กับใคร</span>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4f4f5;">
+<tr><td align="center" style="padding:24px 12px;">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:600px;background-color:#ffffff;border:1px solid #e5e7eb;border-radius:8px;">
+<tr><td class="px" style="padding:28px 32px 8px 32px;">
+<!-- <img src="https://example.com/logo.png" alt="YOUR APP" width="120" style="display:block;border:0;height:auto;"> -->
+<div style="font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:18px;line-height:1.6;color:#2563EB;font-weight:bold;">YOUR APP</div>
+</td></tr>
+<tr><td class="px" style="padding:16px 32px 28px 32px;">
+<h1 style="margin:0 0 16px 0;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:24px;line-height:1.4;color:#111827;font-weight:bold;">ยืนยันตัวตนอีกครั้ง</h1>
+<p style="margin:0 0 16px 0;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:16px;line-height:1.6;color:#111827;">ใส่รหัส OTP นี้เพื่อทำรายการต่อใน YOUR APP</p>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:8px 0 20px 0;"><tr><td align="center" style="background-color:#f3f4f6;border:1px solid #e5e7eb;border-radius:8px;padding:20px 12px;font-family:'SFMono-Regular', Menlo, Consolas, 'Courier New', monospace;font-size:34px;line-height:1.2;font-weight:bold;letter-spacing:8px;color:#111827;">{{ .Token }}</td></tr></table>
+<p style="margin:0 0 16px 0;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:16px;line-height:1.6;color:#111827;font-weight:bold;">รหัสนี้จะหมดอายุในไม่ช้า อย่าบอกรหัสนี้กับใคร</p>
+<p style="margin:8px 0 0 0;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:14px;line-height:1.6;color:#4b5563;">ถ้าไม่ได้เป็นคนขอ ข้ามอีเมลนี้ แล้วเปลี่ยนรหัสผ่านทันที</p>
+</td></tr>
+</table>
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:600px;">
+<tr><td class="px" align="center" style="padding:16px 32px;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:12px;line-height:1.6;color:#4b5563;">YOUR APP</td></tr>
+</table>
+</td></tr>
+</table>
+</body>
+</html>

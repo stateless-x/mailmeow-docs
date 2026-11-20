@@ -2,13 +2,14 @@
 import { describe, expect, test } from 'bun:test';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import { TEMPLATE_IDS, loadTemplate } from '../../src/lib/templates';
 import { ENTITY_EN, GROUPS, PAGES, SITE, buildPages, mdPath, pagePath, toMarkdown } from '../../src/lib/pages';
 
 const dist = join(process.cwd(), 'dist');
 const html = (lang: string, slug: string) => readFileSync(join(dist, lang, slug, 'index.html'), 'utf8');
 const md = (lang: string, slug: string) => readFileSync(join(dist, lang, `${slug}.md`), 'utf8');
 const pages = buildPages();
-const THAI = ['quickstart', 'ai-tools', 'domain', 'smtp'];
+const THAI = ['quickstart', 'ai-tools', 'domain', 'smtp', 'templates'];
 
 function walk(dir: string): string[] {
   return readdirSync(dir).flatMap((f) => {
@@ -37,7 +38,7 @@ describe('pages', () => {
     for (const g of GROUPS) expect(h).toContain(g.label.th);
   });
 
-  test('the 3 Thai pages are Thai; every other TH page shows EN content with the notice', () => {
+  test('the Thai pages are Thai; every other TH page shows EN content with the notice', () => {
     for (const slug of THAI) {
       expect(html('th', slug)).toContain('<html lang="th"');
       expect(html('th', slug)).not.toContain('หน้านี้ยังมีแค่ภาษาอังกฤษ');
@@ -60,6 +61,37 @@ describe('pages', () => {
   test('the language toggle sets mm_lang', () => {
     expect(html('en', 'quickstart')).toContain('mm_lang=');
     expect(html('en', 'quickstart')).toContain('Max-Age=31536000; SameSite=Lax');
+  });
+});
+
+describe('email templates page', () => {
+  test('both languages build with one sandboxed preview per template and no script in it', () => {
+    for (const lang of ['en', 'th'] as const) {
+      const h = html(lang, 'templates');
+      const frames = [...h.matchAll(/<iframe\b[^>]*>/g)].map((m) => m[0]);
+      expect(frames.length, lang).toBe(TEMPLATE_IDS.length);
+      for (const f of frames) {
+        expect(f).toContain('sandbox=""');
+        expect(f).toContain('srcdoc=');
+        expect(f).toMatch(/\btitle="[^"]+"/);
+      }
+      for (const id of TEMPLATE_IDS) {
+        const t = loadTemplate(lang, id);
+        expect(h, `${lang}/${id}`).toContain(`>${t.title}</h3>`);
+        expect(h, `${lang}/${id} html code block`).toContain('<details>');
+      }
+      expect(h).toContain('Authentication');
+      expect(h).toContain('/auth/templates');
+    }
+  });
+
+  test('the Markdown lists every template subject but not their HTML', () => {
+    for (const lang of ['en', 'th'] as const) {
+      const m = md(lang, 'templates');
+      for (const id of TEMPLATE_IDS) expect(m).toContain(`\`${loadTemplate(lang, id).subject}\``);
+      expect(m).not.toContain('<table');
+      expect(m).not.toContain('<!doctype');
+    }
   });
 });
 

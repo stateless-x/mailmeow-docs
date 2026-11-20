@@ -1,0 +1,30 @@
+{
+  "id": "supabase-invite",
+  "group": "supabase",
+  "title": "Invite user",
+  "supabaseTemplate": "Invite user",
+  "subject": "You are invited to YOUR APP",
+  "preheader": "Accept the invitation to create your account.",
+  "previewHeight": 520,
+  "variables": [
+    {
+      "name": "Email",
+      "description": "The person's email address",
+      "example": "mali@example.com"
+    },
+    {
+      "name": "ConfirmationURL",
+      "description": "Link to accept the invitation",
+      "example": "https://example.com/confirm"
+    }
+  ],
+  "available": [
+    "ConfirmationURL",
+    "Token",
+    "TokenHash",
+    "SiteURL",
+    "Email",
+    "Data",
+    "RedirectTo"
+  ]
+}

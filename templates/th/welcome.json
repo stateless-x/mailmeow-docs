@@ -1,0 +1,25 @@
+{
+  "id": "welcome",
+  "group": "app",
+  "title": "ต้อนรับสมาชิกใหม่",
+  "subject": "ยินดีต้อนรับสู่ {{app_name}}",
+  "preheader": "บัญชีพร้อมใช้งานแล้ว เริ่มได้เลย",
+  "previewHeight": 520,
+  "variables": [
+    {
+      "name": "name",
+      "description": "ชื่อของผู้รับ",
+      "example": "มะลิ"
+    },
+    {
+      "name": "app_name",
+      "description": "ชื่อแอป",
+      "example": "Cafe Meow"
+    },
+    {
+      "name": "url",
+      "description": "ปลายทางของปุ่ม เช่น หน้าแอปหรือแดชบอร์ด",
+      "example": "https://example.com/go"
+    }
+  ]
+}

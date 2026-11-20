@@ -1,0 +1,25 @@
+{
+  "id": "welcome",
+  "group": "app",
+  "title": "Welcome",
+  "subject": "Welcome to {{app_name}}",
+  "preheader": "Your account is ready.",
+  "previewHeight": 520,
+  "variables": [
+    {
+      "name": "name",
+      "description": "The person's name",
+      "example": "Mali"
+    },
+    {
+      "name": "app_name",
+      "description": "Your app's name",
+      "example": "Cafe Meow"
+    },
+    {
+      "name": "url",
+      "description": "Where the button goes, such as your app or dashboard",
+      "example": "https://example.com/go"
+    }
+  ]
+}

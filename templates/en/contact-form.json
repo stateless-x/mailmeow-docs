@@ -1,0 +1,30 @@
+{
+  "id": "contact-form",
+  "group": "app",
+  "title": "Contact form notification",
+  "subject": "New message from {{sender_name}}",
+  "preheader": "{{sender_name}} sent a message through your contact form.",
+  "previewHeight": 600,
+  "variables": [
+    {
+      "name": "app_name",
+      "description": "Your app's name",
+      "example": "Cafe Meow"
+    },
+    {
+      "name": "sender_name",
+      "description": "Name the visitor typed in the form",
+      "example": "Mali"
+    },
+    {
+      "name": "sender_email",
+      "description": "Email the visitor typed in the form",
+      "example": "mali@example.com"
+    },
+    {
+      "name": "message",
+      "description": "The visitor's message. Escape HTML in it before you insert it",
+      "example": "Do you ship to Chiang Mai?"
+    }
+  ]
+}

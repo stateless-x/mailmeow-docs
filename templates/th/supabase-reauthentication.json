@@ -1,0 +1,22 @@
+{
+  "id": "supabase-reauthentication",
+  "group": "supabase",
+  "title": "ยืนยันตัวตนอีกครั้ง",
+  "supabaseTemplate": "Reauthentication",
+  "subject": "รหัสยืนยันตัวตน {{ .Token }}",
+  "preheader": "ใส่รหัสนี้เพื่อยืนยันว่าเป็นเจ้าของบัญชี อย่าบอกรหัสนี้กับใคร",
+  "previewHeight": 480,
+  "variables": [
+    {
+      "name": "Token",
+      "description": "รหัส OTP 6 หลัก",
+      "example": "482913"
+    }
+  ],
+  "available": [
+    "Token",
+    "SiteURL",
+    "Email",
+    "Data"
+  ]
+}

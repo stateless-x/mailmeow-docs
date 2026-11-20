@@ -1,0 +1,10 @@
+You are invited
+
+You have been invited to join YOUR APP with {{ .Email }}. Press the button below to accept and create your account.
+
+Accept invitation: {{ .ConfirmationURL }}
+
+Were not expecting this? You can ignore this email.
+
+--
+YOUR APP

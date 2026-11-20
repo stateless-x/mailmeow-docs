@@ -1,0 +1,30 @@
+{
+  "id": "supabase-invite",
+  "group": "supabase",
+  "title": "เชิญเข้าใช้งาน",
+  "supabaseTemplate": "Invite user",
+  "subject": "คำเชิญเข้าใช้ YOUR APP",
+  "preheader": "รับคำเชิญเพื่อสร้างบัญชี",
+  "previewHeight": 520,
+  "variables": [
+    {
+      "name": "Email",
+      "description": "อีเมลของผู้ใช้",
+      "example": "mali@example.com"
+    },
+    {
+      "name": "ConfirmationURL",
+      "description": "ลิงก์สำหรับรับคำเชิญ",
+      "example": "https://example.com/confirm"
+    }
+  ],
+  "available": [
+    "ConfirmationURL",
+    "Token",
+    "TokenHash",
+    "SiteURL",
+    "Email",
+    "Data",
+    "RedirectTo"
+  ]
+}

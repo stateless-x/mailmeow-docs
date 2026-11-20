@@ -1,0 +1,22 @@
+{
+  "id": "supabase-reauthentication",
+  "group": "supabase",
+  "title": "Reauthentication",
+  "supabaseTemplate": "Reauthentication",
+  "subject": "{{ .Token }} is your verification code",
+  "preheader": "Enter this code to confirm it is you. Never share it.",
+  "previewHeight": 480,
+  "variables": [
+    {
+      "name": "Token",
+      "description": "6-digit one-time code (OTP)",
+      "example": "482913"
+    }
+  ],
+  "available": [
+    "Token",
+    "SiteURL",
+    "Email",
+    "Data"
+  ]
+}

@@ -1,0 +1,12 @@
+Confirm it is you
+
+Enter this code to continue with your request on YOUR APP.
+
+{{ .Token }}
+
+This code expires soon. Never share it with anyone.
+
+Did not ask for this? Ignore this email and change your password.
+
+--
+YOUR APP

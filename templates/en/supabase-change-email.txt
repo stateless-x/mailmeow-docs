@@ -1,0 +1,10 @@
+Confirm the new email
+
+We got a request to change the email on a YOUR APP account from {{ .Email }} to {{ .NewEmail }}. Press the button below to confirm.
+
+Confirm change: {{ .ConfirmationURL }}
+
+Did not ask for this? Do not press the button. Your email stays the same.
+
+--
+YOUR APP

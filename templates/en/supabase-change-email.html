@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Change #2563EB to your brand colour (find and replace, it appears several times), replace YOUR APP and the logo URL. Keep the {{ .Variables }}: Supabase fills them in. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<title>Confirm your new email address</title>
+<style>
+  @media only screen and (max-width: 620px) { .px { padding-left: 20px !important; padding-right: 20px !important; } }
+</style>
+</head>
+<body style="margin:0;padding:0;background-color:#f4f4f5;">
+<span class="preheader" style="display:none;font-size:1px;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;">Confirm the change to {{ .NewEmail }}.</span>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4f4f5;">
+<tr><td align="center" style="padding:24px 12px;">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:600px;background-color:#ffffff;border:1px solid #e5e7eb;border-radius:8px;">
+<tr><td class="px" style="padding:28px 32px 8px 32px;">
+<!-- <img src="https://example.com/logo.png" alt="YOUR APP" width="120" style="display:block;border:0;height:auto;"> -->
+<div style="font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:18px;line-height:1.6;color:#2563EB;font-weight:bold;">YOUR APP</div>
+</td></tr>
+<tr><td class="px" style="padding:16px 32px 28px 32px;">
+<h1 style="margin:0 0 16px 0;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:24px;line-height:1.4;color:#111827;font-weight:bold;">Confirm the new email</h1>
+<p style="margin:0 0 16px 0;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:16px;line-height:1.6;color:#111827;">We got a request to change the email on a YOUR APP account from {{ .Email }} to {{ .NewEmail }}. Press the button below to confirm.</p>
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:8px 0 20px 0;"><tr><td align="center" bgcolor="#2563EB" style="background-color:#2563EB;border-radius:6px;"><a href="{{ .ConfirmationURL }}" target="_blank" style="display:inline-block;padding:14px 28px;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:16px;line-height:1.6;color:#ffffff;font-weight:bold;text-decoration:none;border-radius:6px;">Confirm change</a></td></tr></table>
+<p style="margin:0 0 16px 0;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:14px;line-height:1.6;color:#4b5563;">If the button does not work, copy this link into your browser:<br><a href="{{ .ConfirmationURL }}" target="_blank" style="color:#2563EB;word-break:break-all;">{{ .ConfirmationURL }}</a></p>
+<p style="margin:8px 0 0 0;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:14px;line-height:1.6;color:#4b5563;">Did not ask for this? Do not press the button. Your email stays the same.</p>
+</td></tr>
+</table>
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:600px;">
+<tr><td class="px" align="center" style="padding:16px 32px;font-family:-apple-system, 'Segoe UI', 'Leelawadee UI', Tahoma, Thonburi, Arial, sans-serif;font-size:12px;line-height:1.6;color:#4b5563;">YOUR APP</td></tr>
+</table>
+</td></tr>
+</table>
+</body>
+</html>

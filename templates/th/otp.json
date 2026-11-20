@@ -1,0 +1,30 @@
+{
+  "id": "otp",
+  "group": "app",
+  "title": "รหัสเข้าสู่ระบบ (OTP)",
+  "subject": "รหัสเข้าสู่ระบบ {{code}}",
+  "preheader": "รหัสนี้ใช้ได้ {{expires_in}} อย่าบอกรหัสนี้กับใคร",
+  "previewHeight": 520,
+  "variables": [
+    {
+      "name": "code",
+      "description": "รหัส OTP ที่ผู้รับต้องใส่",
+      "example": "482913"
+    },
+    {
+      "name": "name",
+      "description": "ชื่อของผู้รับ",
+      "example": "มะลิ"
+    },
+    {
+      "name": "app_name",
+      "description": "ชื่อแอป",
+      "example": "Cafe Meow"
+    },
+    {
+      "name": "expires_in",
+      "description": "ระยะเวลาที่ใช้ได้ เขียนเป็นข้อความที่อยากให้แสดง",
+      "example": "10 นาที"
+    }
+  ]
+}

@@ -37,6 +37,8 @@ Every message goes through the same path as `POST /emails`, so the same limits, 
 5. Click **Save changes**.
 6. Sign up with a new email in your app. With a test key, the email shows in the mailmeow dashboard under test mode and does not reach a real inbox.
 
+Want the sign-in emails (confirm sign up, magic link, reset password) in Thai or English? Copy ready-made ones from [Email templates](templates.md).
+
 ## Raise Supabase's email rate limit
 
 After you turn on custom SMTP, Supabase keeps a low limit of 30 emails an hour. Open [Rate Limits](https://supabase.com/dashboard/project/_/auth/rate-limits) (**Authentication** → **Rate Limits**) in Supabase and raise **Rate limit for sending emails** to fit your app.

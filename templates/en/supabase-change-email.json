@@ -1,0 +1,36 @@
+{
+  "id": "supabase-change-email",
+  "group": "supabase",
+  "title": "Change email address",
+  "supabaseTemplate": "Change email address",
+  "subject": "Confirm your new email address",
+  "preheader": "Confirm the change to {{ .NewEmail }}.",
+  "previewHeight": 560,
+  "variables": [
+    {
+      "name": "Email",
+      "description": "The person's email address",
+      "example": "mali@example.com"
+    },
+    {
+      "name": "NewEmail",
+      "description": "The new email address",
+      "example": "new@example.com"
+    },
+    {
+      "name": "ConfirmationURL",
+      "description": "Link to confirm the change of email address",
+      "example": "https://example.com/confirm"
+    }
+  ],
+  "available": [
+    "ConfirmationURL",
+    "Token",
+    "TokenHash",
+    "SiteURL",
+    "Email",
+    "Data",
+    "RedirectTo",
+    "NewEmail"
+  ]
+}

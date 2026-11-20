@@ -3,6 +3,7 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { AI_GUIDE } from './ai-guide';
+import { templatesMarkdown } from './templates-page';
 
 export type Lang = 'en' | 'th';
 export const LANGS: Lang[] = ['en', 'th'];
@@ -40,6 +41,7 @@ export const PAGES: PageDef[] = [
   { slug: 'ai', group: 'get-started', title: { en: 'AI integration guide', th: 'คู่มือสำหรับ AI' }, description: 'Rules for AI agents that write code against mailmeow: server-side only, env vars, idempotency, errors and retries, test keys, webhook verification.' }, // TH label (new)
   { slug: 'domain', group: 'get-started', title: { en: 'Set up your domain', th: 'ตั้งค่าโดเมน' }, description: 'Add the DNS records (DKIM, return path, SPF, DMARC) that let you send live email from your own domain.' },
   { slug: 'smtp', group: 'get-started', title: { en: 'Send with SMTP', th: 'ส่งผ่าน SMTP' }, description: 'Send through SMTP from Supabase Auth and other tools that only speak SMTP: settings, Supabase steps, limits and troubleshooting.' },
+  { slug: 'templates', group: 'get-started', title: { en: 'Email templates', th: 'เทมเพลตอีเมล' }, description: 'Copy-paste HTML email templates in Thai and English: login code, welcome, password reset, receipt, contact form, and the six Supabase sign-in emails.' },
   { slug: 'concepts', group: 'concepts', title: { en: 'Concepts', th: 'เรื่องที่ควรรู้' }, description: 'Test mode, server-side keys, streams, domains, email statuses, suppressions, idempotency and limits.' },
   { slug: 'api', group: 'reference', title: { en: 'API reference', th: 'API reference' }, description: 'POST /emails, GET /emails/{id} and GET /emails: fields, examples and responses.' },
   { slug: 'webhooks', group: 'reference', title: { en: 'Webhooks', th: 'Webhooks' }, description: 'Delivery events, payload, signature verification and retries.' },
@@ -52,6 +54,7 @@ export const TH_DESCRIPTIONS: Record<string, string> = {
   quickstart: 'ขอ API key ทดสอบ ส่งอีเมลแรกด้วย cURL หรือ Resend SDK เช็กสถานะ แล้วเปลี่ยนไปใช้จริง',
   smtp: 'ตั้งค่า Supabase Auth และเครื่องมือที่ส่งได้แค่ผ่าน SMTP ให้ส่งอีเมลผ่าน mailmeow พร้อมขั้นตอน ขีดจำกัด และวิธีแก้ปัญหา',
   'ai-tools': 'พรอมต์ให้ก๊อปไปวางใน Claude Code, Cursor, Lovable, Bolt หรือเครื่องมือ AI อื่น เพื่อให้มันทำระบบส่งอีเมลฝั่ง server ด้วย mailmeow',
+  templates: 'เทมเพลตอีเมล HTML ภาษาไทยและอังกฤษ ก๊อปไปใช้ได้เลย มีรหัส OTP ต้อนรับสมาชิก ตั้งรหัสผ่านใหม่ ใบเสร็จ ฟอร์มติดต่อ และอีเมลล็อกอินทั้ง 6 แบบของ Supabase',
   domain: 'เพิ่ม DNS record (DKIM, return path, SPF, DMARC) เพื่อส่งอีเมลจริงจากโดเมนตัวเอง',
 };
 
@@ -102,6 +105,7 @@ const LINKS: [RegExp, string][] = [
   [/\]\(webhooks\.md/g, '](/en/webhooks/'],
   [/\]\(sdk-node\.md/g, '](/en/sdk-node/'],
   [/\]\(migrate-from-resend\.md/g, '](/en/migrate-from-resend/'],
+  [/\]\(templates\.md/g, '](/en/templates/'],
 ];
 export function rewriteLinks(md: string): string {
   return LINKS.reduce((s, [re, to]) => s.replace(re, to), md);
@@ -223,16 +227,20 @@ function thPage(slug: string): { title: string; description: string; body: strin
   return { title: get('title'), description: get('description'), body: stripFrontmatter(raw) };
 }
 
+/** Pages whose EN and TH bodies are built in code, not read from content/. generate.ts writes them as MDX. */
+export const GENERATED = new Set(['ai-tools', 'templates']);
+
 export function buildPages(): Page[] {
   const en = enBodies();
   const pages: Page[] = [];
   for (const def of PAGES) {
-    const enBody = def.slug === 'ai-tools' ? aiToolsMarkdown('en') : en[def.slug]!;
+    const enBody = def.slug === 'ai-tools' ? aiToolsMarkdown('en') : def.slug === 'templates' ? templatesMarkdown('en') : en[def.slug]!;
     pages.push({ lang: 'en', slug: def.slug, title: def.title.en, description: def.description, body: rewriteLinks(enBody), translated: true });
     const th = thPage(def.slug);
-    if (def.slug === 'ai-tools' && th) throw new Error('ai-tools TH is generated, not hand-written');
-    if (def.slug === 'ai-tools') {
-      pages.push({ lang: 'th', slug: def.slug, title: def.title.th, description: TH_DESCRIPTIONS[def.slug]!, body: aiToolsMarkdown('th'), translated: true });
+    if (GENERATED.has(def.slug) && th) throw new Error(`${def.slug} TH is generated, not hand-written`);
+    if (GENERATED.has(def.slug)) {
+      const body = def.slug === 'ai-tools' ? aiToolsMarkdown('th') : templatesMarkdown('th');
+      pages.push({ lang: 'th', slug: def.slug, title: def.title.th, description: TH_DESCRIPTIONS[def.slug]!, body, translated: true });
     } else if (th) {
       pages.push({ lang: 'th', slug: def.slug, title: th.title || def.title.th, description: th.description || TH_DESCRIPTIONS[def.slug]!, body: th.body, translated: true });
     } else {
