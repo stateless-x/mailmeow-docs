@@ -31,13 +31,13 @@ describe('content pipeline', () => {
     expect(rewriteLinks('[a](concepts.md#domains) [b](api-reference.md#errors) [c](webhooks.md#x)')).toBe('[a](/en/domain/) [b](/en/errors/) [c](/en/webhooks/#x)');
   });
 
-  test('every page exists in EN and TH, and the three Thai pages are translated', () => {
+  test('every page exists in EN and TH, and the four Thai pages are translated', () => {
     for (const def of PAGES) {
       expect(pages.find((p) => p.lang === 'en' && p.slug === def.slug)?.translated).toBe(true);
       expect(pages.find((p) => p.lang === 'th' && p.slug === def.slug)).toBeDefined();
     }
     const translated = pages.filter((p) => p.lang === 'th' && p.translated).map((p) => p.slug).sort();
-    expect(translated).toEqual(['ai-tools', 'domain', 'quickstart']);
+    expect(translated).toEqual(['ai-tools', 'domain', 'quickstart', 'smtp']);
   });
 
   test('internal links and anchors point at real pages and headings', () => {

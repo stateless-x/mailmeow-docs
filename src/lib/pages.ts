@@ -39,6 +39,7 @@ export const PAGES: PageDef[] = [
   { slug: 'ai-tools', group: 'get-started', title: { en: 'Use with AI tools', th: 'ใช้กับเครื่องมือ AI' }, description: 'Copy-paste prompts that make Claude Code, Cursor, Lovable, Bolt or any AI tool add server-side email sending with mailmeow.' },
   { slug: 'ai', group: 'get-started', title: { en: 'AI integration guide', th: 'คู่มือสำหรับ AI' }, description: 'Rules for AI agents that write code against mailmeow: server-side only, env vars, idempotency, errors and retries, test keys, webhook verification.' }, // TH label (new)
   { slug: 'domain', group: 'get-started', title: { en: 'Set up your domain', th: 'ตั้งค่าโดเมน' }, description: 'Add the DNS records (DKIM, return path, SPF, DMARC) that let you send live email from your own domain.' },
+  { slug: 'smtp', group: 'get-started', title: { en: 'Send with SMTP', th: 'ส่งผ่าน SMTP' }, description: 'Send through SMTP from Supabase Auth and other tools that only speak SMTP: settings, Supabase steps, limits and troubleshooting.' },
   { slug: 'concepts', group: 'concepts', title: { en: 'Concepts', th: 'เรื่องที่ควรรู้' }, description: 'Test mode, server-side keys, streams, domains, email statuses, suppressions, idempotency and limits.' },
   { slug: 'api', group: 'reference', title: { en: 'API reference', th: 'API reference' }, description: 'POST /emails, GET /emails/{id} and GET /emails: fields, examples and responses.' },
   { slug: 'webhooks', group: 'reference', title: { en: 'Webhooks', th: 'Webhooks' }, description: 'Delivery events, payload, signature verification and retries.' },
@@ -49,6 +50,7 @@ export const PAGES: PageDef[] = [
 
 export const TH_DESCRIPTIONS: Record<string, string> = {
   quickstart: 'ขอ API key ทดสอบ ส่งอีเมลแรกด้วย cURL หรือ Resend SDK เช็กสถานะ แล้วเปลี่ยนไปใช้จริง',
+  smtp: 'ตั้งค่า Supabase Auth และเครื่องมือที่ส่งได้แค่ผ่าน SMTP ให้ส่งอีเมลผ่าน mailmeow พร้อมขั้นตอน ขีดจำกัด และวิธีแก้ปัญหา',
   'ai-tools': 'พรอมต์ให้ก๊อปไปวางใน Claude Code, Cursor, Lovable, Bolt หรือเครื่องมือ AI อื่น เพื่อให้มันทำระบบส่งอีเมลฝั่ง server ด้วย mailmeow',
   domain: 'เพิ่ม DNS record (DKIM, return path, SPF, DMARC) เพื่อส่งอีเมลจริงจากโดเมนตัวเอง',
 };
@@ -125,6 +127,7 @@ function enBodies(): Record<string, string> {
   concepts = patch(concepts, 'import { MailMeow } from "mailmeow";\n\nconst meow = new MailMeow(); // reads MAILMEOW_API_KEY', `import { Resend } from "resend";\n\nconst meow = new Resend(process.env.MAILMEOW_API_KEY, {\n  baseUrl: "${API_URL}",\n});`);
   concepts = patch(concepts, 'Verification usually takes a few minutes, and up to 72 hours if your DNS is slow.', 'Verification can take up to 72 hours if your DNS is slow.');
   concepts = patch(concepts, 'The `mailmeow` Node SDK adds a key for you and reuses it when it retries.', 'The planned `mailmeow` Node SDK will add a key for you and reuse it when it retries. Until it ships, send your own key.');
+  const smtp = src('smtp');
   const domain = takeSection(concepts, 'Domains').section;
 
   let webhooks = src('webhooks');
@@ -146,6 +149,7 @@ function enBodies(): Record<string, string> {
     quickstart,
     concepts,
     domain,
+    smtp,
     api,
     errors,
     webhooks,

@@ -8,7 +8,7 @@ const dist = join(process.cwd(), 'dist');
 const html = (lang: string, slug: string) => readFileSync(join(dist, lang, slug, 'index.html'), 'utf8');
 const md = (lang: string, slug: string) => readFileSync(join(dist, lang, `${slug}.md`), 'utf8');
 const pages = buildPages();
-const THAI = ['quickstart', 'ai-tools', 'domain'];
+const THAI = ['quickstart', 'ai-tools', 'domain', 'smtp'];
 
 function walk(dir: string): string[] {
   return readdirSync(dir).flatMap((f) => {
