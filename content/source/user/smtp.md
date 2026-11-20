@@ -19,7 +19,7 @@ Open the dashboard, go to **API keys**, and find **Connect with SMTP**. Copy Hos
 | Username | `mailmeow` (any value works) |
 | Password | Your mailmeow API key (`mm_test_...` or `mm_live_...`) |
 | Encryption | STARTTLS |
-| Sender email | An address on your verified domain, like `hello@acme.com` |
+| Sender email address | An address on your verified domain, like `hello@acme.com` |
 
 Every message goes through the same path as `POST /emails`, so the same limits, statuses and [webhooks](webhooks.md) apply.
 
@@ -29,30 +29,30 @@ Every message goes through the same path as `POST /emails`, so the same limits, 
 2. Open Supabase's SMTP settings: [supabase.com/dashboard/project/_/auth/smtp](https://supabase.com/dashboard/project/_/auth/smtp) and pick your project. In the menu it is under **Authentication** → **Emails** → **SMTP Settings**.
 3. Turn on **Enable custom SMTP**.
 4. Fill in the fields:
-   - **Sender email**: `hello@acme.com` (any address on your domain)
+   - **Sender email address**: `hello@acme.com` (any address on your domain)
    - **Sender name**: your app's name
    - **Host** and **Port number**: copied from **Connect with SMTP**
    - **Username**: `mailmeow`
    - **Password**: your mailmeow API key
-5. Leave **Minimum interval** as it is, then save.
+5. Click **Save changes**.
 6. Sign up with a new email in your app. With a test key, the email shows in the mailmeow dashboard under test mode and does not reach a real inbox.
 
 ## Raise Supabase's email rate limit
 
-After you turn on custom SMTP, Supabase keeps a low limit of 30 emails an hour. Open [Rate Limits](https://supabase.com/dashboard/project/_/auth/rate-limits) (**Authentication** → **Rate Limits**) in Supabase and raise the email limit to fit your app.
+After you turn on custom SMTP, Supabase keeps a low limit of 30 emails an hour. Open [Rate Limits](https://supabase.com/dashboard/project/_/auth/rate-limits) (**Authentication** → **Rate Limits**) in Supabase and raise **Rate limit for sending emails** to fit your app.
 
 ## Go live
 
 1. [Set up your domain](concepts.md#domains) and wait until it is verified.
 2. Create a live key (`mm_live_...`) and put it in Supabase's **Password** field.
-3. Check that **Sender email** is on the verified domain.
+3. Check that **Sender email address** is on the verified domain.
 
 A live key refuses a From or Sender address on a domain that is not verified.
 
 ## Limits and what is not supported yet
 
-- Each message can be up to 2 MB and have up to 50 recipients.
-- Attachments are not supported yet.
+- Each message can be up to 16 MB and have up to 50 recipients.
+- Attachments: up to 10 MB of files and 20 files per email. Some file types, such as `.exe`, are refused.
 - A message needs at least one recipient in To or Cc. Sending to Bcc only is not supported yet.
 - A retry is safe. mailmeow uses the Message-ID header and the recipients to recognise the same message, so it is not sent twice.
 
@@ -67,8 +67,8 @@ Supabase only shows "Error sending ... email". To see why, open **API keys** in 
 | The From domain is not verified for this account. | [Verify the domain](concepts.md#domains), or use a test key. |
 | This account is paused, so it cannot send live email. | Use a test key, or contact us. |
 | Put at least one recipient in To. | Add a To or Cc recipient. Bcc only is not supported yet. |
-| Attachments are not supported yet. | Send without the attachment. |
-| The message is larger than 2 MB. | Make the message smaller. |
+| The file ... can't be sent. / Too many attachments. / Attachments are too large. | Remove the file type that is refused (such as `.exe`), or send fewer and smaller files: 10 MB and 20 files per email. |
+| The message is larger than 16 MB. | Make the message smaller. |
 | The account's limit of ... emails a day / this month. | Wait for the reset time in the message, or contact us to send more. Test mode limits start again at 00:00 UTC (07:00 in Thailand). |
 | Too many failed sign-ins / too many connections from your address. | Wait a minute and try again. |
 | Temporary error. Try again. | Try again. Most tools retry on their own. |
@@ -77,4 +77,4 @@ Other errors are listed in [Errors](api-reference.md#errors).
 
 ## WordPress
 
-A WordPress guide is coming after attachments are supported.
+A WordPress guide is coming soon.

@@ -1,7 +1,7 @@
 ---
 title: Concepts
 status: draft (describes the planned API; nothing is live yet)
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 # Concepts
@@ -116,6 +116,7 @@ When an address bounces permanently or marks you as spam, we stop sending to it.
 | What | How long |
 |---|---|
 | Email bodies (`html` and `text`) | 7 days on the Free plan, 30 days on paid plans. After that they return `null` |
+| Attachment files | Deleted once the email is sent (or fails), and at the latest after 7 days. The name, type and size stay with the email record |
 | The email itself (addresses, subject, status, events, webhook deliveries) | 90 days on every plan, then it is deleted and `GET /emails/{id}` returns `404` |
 | Blocked addresses (suppressions) | Until you remove them |
 
@@ -141,5 +142,6 @@ These numbers are provisional for the beta.
 | Requests per second, per key | 10 |
 | Recipients per email (`to` + `cc` + `bcc`) | 50 |
 | Email size (`html` + `text` + headers) | 1 MB |
+| Attachments per email | 20 files, 10 MB in total |
 
 Going over the rate limit returns `429 rate_limit_exceeded` with a `retry-after` header in seconds.

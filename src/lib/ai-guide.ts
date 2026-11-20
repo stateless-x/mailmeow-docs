@@ -50,7 +50,7 @@ export const AI_GUIDE = `Rules for an AI agent that writes code to send email wi
 Errors always look like this:
 
 \`\`\`json
-{ "statusCode": 422, "name": "validation_error", "message": "The \`attachments\` field is not supported yet." }
+{ "statusCode": 422, "name": "validation_error", "message": "The \`scheduled_at\` field is not supported yet." }
 \`\`\`
 
 Branch on \`name\`, not on \`message\`. If \`fetch\` throws (no response at all), treat it as a network error.
@@ -103,7 +103,8 @@ Do not retry forever. Retry a small number of times (the plain-\`fetch\` prompt 
 
 - Create the client with the base URL: \`new Resend(process.env.MAILMEOW_API_KEY, { baseUrl: process.env.MAILMEOW_BASE_URL ?? "https://api.mailmeow.dev" })\`. The package also reads \`RESEND_BASE_URL\`.
 - \`emails.send\`, \`get\` and \`list\` work.
-- Not supported yet: \`attachments\`, \`scheduled_at\`, \`template\`, \`topic_id\`. Sending one returns \`422 validation_error\` that names the field. An unknown field also returns \`422\`, with \`Unknown field\` and its name. Nothing is silently ignored. Do not send these fields.
+- Attachments work: \`attachments: [{ filename, content }]\`, with \`content\` as base64 (a Node \`Buffer\` works as is). At most 20 files and 10 MB in total per email. \`path\` is not supported yet. Blocked file types such as \`.exe\` return \`422\`.
+- Not supported yet: \`scheduled_at\`, \`template\`, \`topic_id\`. Sending one returns \`422 validation_error\` that names the field. An unknown field also returns \`422\`, with \`Unknown field\` and its name. Nothing is silently ignored. Do not send these fields.
 - Not supported yet: opens and clicks tracking, batch send, the Audiences API and the Broadcasts API.
 - At most 50 recipients across \`to\`, \`cc\` and \`bcc\`. Requests per second: 10 per key. Email size: 1 MB. These limits are provisional.
 - Newsletters and campaigns need their own key on the \`broadcast\` stream, with an unsubscribe link and the \`List-Unsubscribe\` headers. Login and receipt emails use the default \`transactional\` stream.

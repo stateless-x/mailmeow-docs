@@ -1,7 +1,7 @@
 ---
 title: Migrate from Resend
 status: draft (describes the planned API; nothing is live yet)
-updated: 2026-11-16
+updated: 2026-11-20
 ---
 
 # Migrate from Resend
@@ -34,7 +34,8 @@ Add your endpoint again in mailmeow and use the new `whsec_` secret. The signatu
 | | Resend | mailmeow |
 |---|---|---|
 | Newsletters and campaigns | Same key | Use a separate key with the `broadcast` stream, so campaigns never delay login emails. [Why](concepts.md#streams-transactional-and-broadcast) |
-| `attachments`, `scheduled_at`, `template`, `topic_id` | Supported | Not yet. Returns `422` naming the field |
+| `attachments` | Files up to 40 MB per email; `content` (base64) or `path` (URL) | Supported with `content`. Up to 10 MB and 20 files per email. `path` is not supported yet: send the file as base64 in `content`. [Details](api-reference.md#attachments) |
+| `scheduled_at`, `template`, `topic_id` | Supported | Not yet. Returns `422` naming the field |
 | Opens and clicks | Tracked | Not tracked yet |
 | Batch send, Audiences, Broadcasts API | Supported | Not yet |
 | Test addresses | `delivered@resend.dev` and others | Use a `mm_test_` key; see [test mode](concepts.md#api-keys-and-test-mode) |

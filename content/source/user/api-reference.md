@@ -1,7 +1,7 @@
 ---
 title: API reference
 status: draft (describes the planned API; nothing is live yet)
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 # API reference
@@ -34,8 +34,9 @@ The API matches Resend's for these endpoints, so the `resend` SDK works too.
 | `reply_to` | string or string[] | no | |
 | `headers` | object | no | Custom email headers, for example `List-Unsubscribe` |
 | `tags` | array of `{ name, value }` | no | Your own labels; returned on the email and in webhooks. ASCII letters, numbers, `_` and `-` |
+| `attachments` | array of files | no | Up to 20 files, 10 MB in total. See [Attachments](#attachments) |
 
-Not supported yet: `attachments`, `scheduled_at`, `template`, `topic_id`. Sending any of them returns `422 validation_error` that names the field, so nothing is silently ignored.
+Not supported yet: `scheduled_at`, `template`, `topic_id`. Sending any of them returns `422 validation_error` that names the field, so nothing is silently ignored.
 
 Optional request header: `Idempotency-Key` (see [Idempotency](concepts.md#idempotency)).
 
@@ -62,6 +63,37 @@ Response `200`:
 
 `200` means the email is accepted and queued, not delivered yet. Track delivery with [Get an email](#get-an-email) or [webhooks](webhooks.md).
 
+### Attachments
+
+Each item in `attachments` is a file:
+
+| Field | Type | Required | Notes |
+|---|---|---|---|
+| `filename` | string | yes | Shown to the person who gets the email, for example `invoice.pdf` |
+| `content` | string | yes | The file as base64 |
+| `content_type` | string | no | For example `application/pdf`. Taken from the file name when missing |
+| `content_id` | string | no | Makes the file an inline image. See below |
+
+- Send the file as base64 in `content`. `path` (a URL to fetch the file from) is not supported yet and returns `422`. With the `resend` package, a Node `Buffer` as `content` works as is.
+- Limits: 10 MB of files in total per email (before base64), and at most 20 files. Over either limit returns `422` with the limit in `message`.
+- Files that email providers block, such as `.exe`, `.bat`, `.js`, `.msi` and `.vbs`, return `422` naming the file.
+- The file content is deleted once the email is sent (or fails), and at the latest after 7 days. The name, type and size stay with the email ([Retention](concepts.md#retention)).
+
+To show an image inside the email, give the file a `content_id` and point to it from `html` with `cid:`:
+
+```json
+{
+  "from": "Acme <hello@acme.com>",
+  "to": ["you@example.com"],
+  "subject": "Your invoice",
+  "html": "<img src=\"cid:logo\"><p>Invoice attached.</p>",
+  "attachments": [
+    { "filename": "invoice.pdf", "content": "JVBERi0xLjQK..." },
+    { "filename": "logo.png", "content": "iVBORw0KGgo...", "content_id": "logo" }
+  ]
+}
+```
+
 ## Get an email
 
 `GET /emails/{id}`
@@ -82,9 +114,14 @@ Response `200`:
   "text": "Glad you are here.",
   "tags": [{ "name": "type", "value": "welcome" }],
   "last_event": "delivered",
-  "created_at": "2026-11-16T09:30:00.000Z"
+  "created_at": "2026-11-16T09:30:00.000Z",
+  "attachments": [
+    { "filename": "invoice.pdf", "content_type": "application/pdf", "size": 48210 }
+  ]
 }
 ```
+
+`attachments` lists the files sent with the email: name, type and `size` in bytes. It is `[]` when there are none. The file content is never returned, because it is deleted once the email is sent. [List emails](#list-emails) does not include `attachments`.
 
 Test keys only see test emails; live keys only see live emails.
 
@@ -129,7 +166,7 @@ Errors always have this shape:
 {
   "statusCode": 422,
   "name": "validation_error",
-  "message": "The `attachments` field is not supported yet."
+  "message": "The `scheduled_at` field is not supported yet."
 }
 ```
 
