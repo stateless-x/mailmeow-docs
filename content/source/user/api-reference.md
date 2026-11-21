@@ -15,6 +15,7 @@ Format: JSON request and response bodies. Field names are `snake_case`.
 | [`POST /emails`](#send-an-email) | Send an email |
 | [`GET /emails/{id}`](#get-an-email) | Get one email and its status |
 | [`GET /emails`](#list-emails) | List emails, newest first |
+| [`/mcp`](#mcp-server) | MCP server for AI tools (test keys only) |
 | [Errors](#errors) | Error format and names |
 
 The API matches Resend's for these endpoints, so the `resend` SDK works too.
@@ -157,6 +158,26 @@ Response `200`:
 ```
 
 To get the next page, pass the last item's `id` as `after`.
+
+## MCP server
+
+`https://api.mailmeow.dev/mcp`
+
+A hosted [MCP](https://modelcontextprotocol.io) server, so an AI tool (Claude Code, Cursor and others) can send a test email and read it back. There is nothing to install: give the tool the URL and an API key.
+
+- **Auth:** `Authorization: Bearer <api key>`, the same as the rest of the API. The same rate limit applies.
+- **Test keys only.** A live key (`mm_live_`) gets `403 restricted_api_key`: "The MCP server takes test keys only (mm_test_…). Create a test key in the dashboard." Emails sent here are saved and simulated, never delivered to a real inbox.
+- **Transport:** Streamable HTTP, `POST` only. The server keeps no session, so each request stands alone.
+- **Browsers:** like the rest of the API, a request with an `Origin` header gets `403 browser_request_blocked`.
+- **Size:** a request body is limited to 1 MiB. The tools take no attachments.
+
+| Tool | What it does |
+|---|---|
+| `send_test_email` | Send a test email. Input: `from`, `to` (one address or a list), `subject`, `html` and `text` (at least one), `reply_to` (optional). Returns `{ "id", "status": "queued" }`. |
+| `get_email` | Get one email by `id`: the fields of [Get an email](#get-an-email), plus `events`, the delivery trail, oldest first. |
+| `list_emails` | List emails, newest first. Input: `limit` (1 to 100, default 20) and `after` (an email id). Returns the same as [List emails](#list-emails). |
+
+Permissions follow the API. A key with Send only can use `send_test_email`; `get_email` and `list_emails` return the tool error "This key can only send. To read emails, create a test key with Full access." Errors come back as tool errors (`isError: true`) with the same message the API gives, for example a `validation_error` message for a bad `from`.
 
 ## Errors
 

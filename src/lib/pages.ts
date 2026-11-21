@@ -205,16 +205,99 @@ Building something else, or want the full rule list? See the [AI integration gui
 ทำโปรเจกต์แบบอื่น หรืออยากอ่านกฎทั้งหมด ดู [คู่มือสำหรับ AI](/en/ai/) (มีแค่ภาษาอังกฤษ)`,
 };
 
+const MCP_SECTION: Record<Lang, string> = {
+  en: `## Connect with MCP
+
+mailmeow has a hosted MCP server, so your AI tool can send a test email and read it back. There is nothing to install: give the tool the URL and an API key.
+
+- URL: \`${API_URL}/mcp\`
+- Header: \`Authorization: Bearer <your test key>\`
+- Test keys only (\`mm_test_\`). A live key is refused. Emails are saved and simulated, never delivered to a real inbox.
+- Tools: \`send_test_email\`, \`get_email\`, \`list_emails\`. The last two need a key with Full access.
+
+### Claude Code
+
+\`\`\`bash
+claude mcp add --transport http mailmeow ${API_URL}/mcp \\
+  --header "Authorization: Bearer mm_test_..."
+\`\`\`
+
+This saves the key on your machine for the current project. Run \`/mcp\` inside Claude Code to check that it connected. See the [Claude Code MCP docs](https://code.claude.com/docs/en/mcp).
+
+### Cursor
+
+Add this to \`.cursor/mcp.json\` in your project, or to \`~/.cursor/mcp.json\` for every project. The key is read from an environment variable, so it never lands in a file you commit.
+
+\`\`\`json
+{
+  "mcpServers": {
+    "mailmeow": {
+      "url": "${API_URL}/mcp",
+      "headers": {
+        "Authorization": "Bearer \${env:MAILMEOW_API_KEY}"
+      }
+    }
+  }
+}
+\`\`\`
+
+Set \`MAILMEOW_API_KEY\` to your test key before you start Cursor. See the [Cursor MCP docs](https://cursor.com/docs/context/mcp).
+
+### Any other tool
+
+Pick the Streamable HTTP transport (sometimes called "HTTP"), then give it the URL \`${API_URL}/mcp\` and the header \`Authorization: Bearer <your test key>\`.`,
+  th: `## เชื่อมต่อด้วย MCP
+
+ต่อ MCP server ของ mailmeow แล้ว เครื่องมือ AI จะส่งอีเมลทดสอบและเช็กผลได้เอง ไม่ต้องติดตั้งอะไร แค่ใส่ URL กับ API key
+
+- URL: \`${API_URL}/mcp\`
+- Header: \`Authorization: Bearer <API key ทดสอบ>\`
+- ใช้ได้เฉพาะ API key ทดสอบ (\`mm_test_\`) ถ้าใส่ API key จริง (live) จะถูกปฏิเสธ อีเมลที่ส่งแค่ถูกบันทึกและจำลอง ไม่ถึงกล่องจดหมายของใครจริง
+- เครื่องมือมี 3 ตัว: \`send_test_email\`, \`get_email\`, \`list_emails\` สองตัวหลังต้องใช้ API key ที่มีสิทธิ์ Full access
+
+### Claude Code
+
+\`\`\`bash
+claude mcp add --transport http mailmeow ${API_URL}/mcp \\
+  --header "Authorization: Bearer mm_test_..."
+\`\`\`
+
+คำสั่งนี้เก็บ API key ไว้ในเครื่องตัวเอง ใช้กับโปรเจกต์ที่เปิดอยู่ พิมพ์ \`/mcp\` ใน Claude Code เพื่อเช็กว่าเชื่อมต่อแล้ว ดู [เอกสาร MCP ของ Claude Code](https://code.claude.com/docs/en/mcp)
+
+### Cursor
+
+เพิ่มโค้ดนี้ใน \`.cursor/mcp.json\` ของโปรเจกต์ หรือ \`~/.cursor/mcp.json\` ถ้าอยากใช้ทุกโปรเจกต์ API key อ่านจาก environment variable จึงไม่ติดไปในไฟล์ที่ commit
+
+\`\`\`json
+{
+  "mcpServers": {
+    "mailmeow": {
+      "url": "${API_URL}/mcp",
+      "headers": {
+        "Authorization": "Bearer \${env:MAILMEOW_API_KEY}"
+      }
+    }
+  }
+}
+\`\`\`
+
+ตั้งค่า \`MAILMEOW_API_KEY\` เป็น API key ทดสอบก่อนเปิด Cursor ดู [เอกสาร MCP ของ Cursor](https://cursor.com/docs/context/mcp)
+
+### เครื่องมืออื่น
+
+เลือก transport แบบ Streamable HTTP (บางที่เรียกแค่ "HTTP") แล้วใส่ URL \`${API_URL}/mcp\` กับ header \`Authorization: Bearer <API key ทดสอบ>\``,
+};
+
 /** Plain Markdown for llms-full.txt, .md routes and Copy for AI. */
 function aiToolsMarkdown(lang: Lang): string {
   const parts = parsePrompts().map((p) => `## ${p.tool}\n\n${lang === 'th' ? p.thIntro : p.enIntro}\n\n\`\`\`\`text\n${p.prompt}\n\`\`\`\``);
-  return `${AI_TOOLS_INTRO[lang]}\n\n${parts.join('\n\n')}\n`;
+  return `${AI_TOOLS_INTRO[lang]}\n\n${parts.join('\n\n')}\n\n${MCP_SECTION[lang]}\n`;
 }
 
 /** MDX for the Starlight entry: one tab per tool. Same data as aiToolsMarkdown. */
 export function aiToolsMdx(lang: Lang): string {
   const tabs = parsePrompts().map((p) => `<TabItem label="${p.tool}">\n\n${lang === 'th' ? p.thIntro : p.enIntro}\n\n\`\`\`\`text\n${p.prompt}\n\`\`\`\`\n\n</TabItem>`);
-  return `import { Tabs, TabItem } from '@astrojs/starlight/components';\n\n${AI_TOOLS_INTRO[lang]}\n\n<Tabs syncKey="ai-tool">\n\n${tabs.join('\n\n')}\n\n</Tabs>\n`;
+  return `import { Tabs, TabItem } from '@astrojs/starlight/components';\n\n${AI_TOOLS_INTRO[lang]}\n\n<Tabs syncKey="ai-tool">\n\n${tabs.join('\n\n')}\n\n</Tabs>\n\n${MCP_SECTION[lang]}\n`;
 }
 
 // ---------- public API ----------
